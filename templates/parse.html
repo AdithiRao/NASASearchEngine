@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  <title>Results</title>
+</head>
+<style>
+body,h1,h2,h3,h4,h5,h6,p {font-family: "Lato", sans-serif;}
+body, html {
+  height: 100%;
+  color: #777;
+  line-height: 1.8;
+  text-align: center;
+}
+
+
+.w3-wide {letter-spacing: 10px;}
+.w3-hover-opacity {cursor: pointer;}
+
+</style>
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar" id="myNavbar">
+    <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <a href="" class="w3-bar-item w3-button" type="submit" name="Home" required> Home </a>
+    <a class="w3-bar-item w3-button w3-hide-small">Author: Adithi Rao</a>
+
+   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
+      <i class="fa fa-search"></i>
+    </a>
+  </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
+    <!-- <a href="#about" class="w3-bar-item w3-button" onclick="toggleFunction()">ABOUT</a>
+    <a href="#portfolio" class="w3-bar-item w3-button" onclick="toggleFunction()">PORTFOLIO</a>
+    <a href="#contact" class="w3-bar-item w3-button" onclick="toggleFunction()">CONTACT</a> -->
+    <a href="#" class="w3-bar-item w3-button">SEARCH</a>
+  </div>
+</div>
+<!-- Container (Contact Section) -->
+<div class="w3-content w3-container w3-padding-64" id="contact">
+<form name="passdata" action="." method="post" id="form1">
+
+  <div class="w3-row w3-padding-32 w3-section">
+    <div class="w3-col m8 w3-panel">
+      <div class="w3-large w3-margin-bottom">
+      </div>
+      <div class="checkbox">
+        <span style="width:100px;display:inline-block;">Filter By:</span>
+        <div id="myDiv">
+        </div>
+
+        <input type="hidden" value="1" id="theValue"  />
+        <input type="checkbox" value="Add Another TextBox" id="adddate" onclick="addElement1();">
+        <span style="width:100px;display:inline-block;">Date range</span>
+        <input type="checkbox" value="Add Another TextBox" id="addloc" onclick="addElement2();">
+        <span style="width:100px;display:inline-block;">Location</span>
+        <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+            <input class="w3-input w3-border" type="text" placeholder= "Search"  name="Search" required>
+        </div>
+        <button class="w3-button w3-black w3-right w3-section" type="submit" id= "refine" value="refine">
+          <i class="fa fa-paper-plane"></i> Refine my search!
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+
+<!-- Table section -->
+<div class="container">
+<body id= "load" onload="images">
+  <table id="myTable" border="1" class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Images</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <script type="text/javascript" id="images">
+    // Adds images to the table based on the api call's returned values
+      function addEntry(tableID, image, descr, cen, date, locat){
+        let tableRef = document.getElementById(tableID);
+        let newRow = tableRef.insertRow(-1);
+
+        //Creates the first column with the images
+        let newCell = newRow.insertCell(0);
+        let br1 = document.createElement("br");
+        let src = image,
+        img = document.createElement('img');
+        img.src = src;
+        img.style = "width:200px;height:200px;"
+        var imgLink = document.createElement("a");
+        imgLink.setAttribute("href", image);
+        imgLink.innerHTML = "Click here to view bigger image";
+        newCell.appendChild(img);
+        newCell.appendChild(br1);
+        newCell.appendChild(imgLink);
+
+
+        let cell2 = newRow.insertCell(1);
+        let title = document.createTextNode("Title: " + descr);
+        let center = document.createTextNode("Center: " + cen);
+        let date_c = document.createTextNode("Date created: " + date);
+        let loc = document.createTextNode("Location: " + locat);
+
+
+
+
+        let br2 = document.createElement("br");
+        let br3 = document.createElement("br");
+        let br4 = document.createElement("br");
+
+        // Creates the second column
+        cell2.appendChild(title);
+        cell2.appendChild(br2);
+        cell2.appendChild(center);
+        cell2.appendChild(br3);
+        cell2.appendChild(date_c);
+        cell2.appendChild(br4);
+        cell2.appendChild(loc);
+      }
+      //When the page is loaded, creates the table by accessing variables from app.py
+       document.getElementById('load').onload = function() {
+         var len = {{length}};
+         if(len != 0) {
+           var imagesL={{images|tojson}};
+           var len = {{length}};
+           var descrL ={{descr|tojson}};
+           var centerL = {{centers|tojson}};
+           var dateL = {{date|tojson}};
+           var locatL = {{locat|tojson}};
+           var myTable = document.getElementById("load");
+           for(i=0; i<len; i++){
+             imageURL = imagesL[i];
+             descr = descrL[i];
+             cen = centerL[i];
+             date = dateL[i];
+             locati = locatL[i];
+             addEntry("myTable", imageURL, descr, cen, date, locati);
+         }
+       }else{
+         //if no entries match
+         document.getElementById("demo").innerHTML = "<strong> No results match this entry- try a different search! </strong>";
+       }
+    }
+    </script>
+    <!-- Tells the user what they are looking at -->
+    <p> Now searching for: {{qOut}} </p>
+    <p>{{lOut}}</p>
+    <p>{{dateOut}}</p>
+    <p id="demo"></p>
+  </table>
+
+
+  </script>
+  <script type="text/javascript">
+  // Change style of navbar on scroll
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+      var navbar = document.getElementById("myNavbar");
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+          navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
+      } else {
+          navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
+      }
+  }
+
+  // Used to toggle the menu on small screens when clicking on the menu button
+  function toggleFunction() {
+      var x = document.getElementById("navDemo");
+      if (x.className.indexOf("w3-show") == -1) {
+          x.className += " w3-show";
+      } else {
+          x.className = x.className.replace(" w3-show", "");
+      }
+  }
+
+  //Adds a filtering option for location if the box is checked
+  function addElement2() {
+    if(document.getElementById("addloc").checked){
+      var ni = document.getElementById('myDiv');
+      var newdiv2 = document.createElement('div');
+      var divIdName2 = 'location';
+      newdiv2.setAttribute('id',divIdName2);
+      newdiv2.innerHTML = '<input type="text" name="location" value="location" />';
+      ni.appendChild(newdiv2);
+    }else{
+    // Removes an element from the document
+      var element2 = document.getElementById('location');
+      element2.parentNode.removeChild(element2);
+    }
+  }
+
+  //Adds a filtering option for date if the box is checked
+  function addElement1() {
+    if(document.getElementById("adddate").checked){
+      //Creates the calendar option
+      $(function() {
+
+        $('input[name="datefilter"]').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+
+        $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+        });
+
+        $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
+
+      });
+      var ni = document.getElementById('myDiv');
+      var newdiv = document.createElement('div');
+      var divIdName1 = 'date';
+      newdiv.setAttribute('id',divIdName1);
+      newdiv.innerHTML = '<input type="text" name="datefilter" value="" />';
+      ni.appendChild(newdiv);
+    }else{
+    // Removes an element from the document
+      var element = document.getElementById('date');
+      element.parentNode.removeChild(element);
+    }
+  }
+  </script>
+
+</body>
+</div>
+</html>
