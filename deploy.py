@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-# import requests
+import requests
 import urllib.request, json
 from datetime import date
 
